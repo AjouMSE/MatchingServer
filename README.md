@@ -5,10 +5,10 @@ Team project of Ajou Univ. Media Software Engineering Lecture
 
 ## Includes
 
--   socket-io
--   mysql
--   redis
--   log service
+-   Node.js
+-   Socket.io
+-   MySQL
+-   Redis
 
 ## Installation
 
