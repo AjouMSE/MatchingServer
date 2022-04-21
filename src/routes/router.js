@@ -30,6 +30,9 @@ class Router {
             case TYPE.ROUTES.CANCEL_MATCHING:
                 rtn = await matchingController.cancelMatching(socket, data);
                 break;
+            case TYPE.ROUTES.SEND_MATCH_CODE:
+                rtn = await matchingController.sendMatchCode(socket, data);
+                break;
 
             case TYPE.ROUTES.MATCH_MADE:
             default:

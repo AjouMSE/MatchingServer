@@ -46,56 +46,14 @@ const errors = {
         message: 'invalid response data',
     },
 
-    // Customer
-    invalidCustomerEmail: {
+    // Matching
+    matchRoomNotFound: {
         code: 11001,
-        message: 'invalid customer email',
+        message: 'match room not found',
     },
-    customerPasswordMismatch: {
+    matchRoomClientNotFound: {
         code: 11002,
-        message: 'customer password mismatch',
-    },
-    duplicatedEmail: {
-        code: 11003,
-        message: 'duplicated email',
-    },
-    unauthorized: {
-        code: 11004,
-        message: 'customer unauthorized',
-    },
-    invalidCustomerId: {
-        code: 11005,
-        message: 'invalid customer id',
-    },
-
-    // Store
-    invalidStoreId: {
-        code: 12001,
-        message: 'invalid store id',
-    },
-    customFieldMismatch: {
-        code: 12002,
-        message: 'custom field mismatch',
-    },
-
-    // Product
-    invalidProductId: {
-        code: 13001,
-        message: 'invalid product id',
-    },
-
-    // Order
-    invalidOrderId: {
-        code: 14001,
-        message: 'invalid order id',
-    },
-    orderAlreadyRefunded: {
-        code: 14002,
-        message: 'order already refunded',
-    },
-    invalidProductIncluded: {
-        code: 14002,
-        message: 'invalid product included',
+        message: 'match room client not found',
     },
 };
 

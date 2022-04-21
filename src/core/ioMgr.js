@@ -15,8 +15,8 @@ class IOService {
     }
 
     emitToUser(socketId, msg, data) {
-        this.io.to(socketId).emit(msg, { data });
-        logger.info(`[${socketId}] EmitToUser ${msg} / ${JSON.stringify({ data })}`);
+        this.io.to(socketId).emit(msg, data);
+        logger.info(`[${socketId}] EmitToUser ${msg} / ${JSON.stringify(data)}`);
     }
 }
 

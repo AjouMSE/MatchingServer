@@ -4,10 +4,13 @@ exports.ROUTES = Object.freeze({
     START_MATCHING: 'StartMatching',
     CANCEL_MATCHING: 'CancelMatching',
 
+    SEND_MATCH_CODE: 'SendMatchCode',
+    RECEIVE_MATCH_CODE: 'ReceiveMatchCode',
+
     MATCH_MADE: 'MatchMade',
 });
 
 exports.USER_TYPE = Object.freeze({
-    HOST: 'HOST',
-    CLIENT: 'CLIENT',
+    HOST: 0,
+    CLIENT: 1,
 });
