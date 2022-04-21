@@ -27,6 +27,9 @@ class Router {
             case TYPE.ROUTES.START_MATCHING:
                 rtn = await matchingController.startMatching(socket, data);
                 break;
+            case TYPE.ROUTES.CANCEL_MATCHING:
+                rtn = await matchingController.cancelMatching(socket, data);
+                break;
 
             case TYPE.ROUTES.MATCH_MADE:
             default:

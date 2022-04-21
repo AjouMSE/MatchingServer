@@ -31,7 +31,7 @@ class SocketMgr {
     }
 
     emit(userIdx, res) {
-        this.socket.emit(this.msg, { data: res });
+        this.socket.emit(this.msg, res);
         logger.info(`[${this.socket.id}][${userIdx}] Response ${this.msg} / ${JSON.stringify(res)}`);
     }
 
@@ -40,7 +40,7 @@ class SocketMgr {
             logger.error(err);
         }
         logger.error('[' + this.socket.id + '][' + userIdx + ']ResponseError' + this.msg + ' / ' + JSON.stringify(err));
-        this.socket.emit(this.msg, { error: err });
+        this.socket.emit(this.msg, err);
     }
 }
 

@@ -6,6 +6,7 @@ const UserModel = require('@src/models/userModel');
 
 // Utils
 const TYPE = require('@src/utils/type');
+const logger = require('@src/utils/logger');
 
 class Matching {
     constructor() {
@@ -19,9 +20,22 @@ class Matching {
     push(user) {
         this.waitingQueue.push(user);
 
+        logger.info(`[Matching Manager][push] User ${user.idx} pushed`);
+
         if (this.check() == true) {
             this.make();
         }
+    }
+
+    /**
+     *
+     * @param {Number} userIdx
+     */
+    pop(userIdx) {
+        const idx = this.waitingQueue.findIndex((x) => x.idx == userIdx);
+        this.waitingQueue.splice(idx, 1);
+
+        logger.info(`[Matching Manager][pop] User ${userIdx} popped`);
     }
 
     check() {
@@ -34,6 +48,8 @@ class Matching {
     make() {
         const host = this.waitingQueue.shift();
         const client = this.waitingQueue.shift();
+
+        logger.info(`[Matching Manager][make] User ${host.idx} host / User ${client.idx} client`);
 
         ioMgr.emitToUser(host.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.HOST });
         ioMgr.emitToUser(client.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.CLIENT });

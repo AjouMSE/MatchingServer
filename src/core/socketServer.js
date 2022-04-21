@@ -4,6 +4,7 @@ const express = require('express');
 
 // Core
 const ioMgr = require('@src/core/ioMgr');
+const matchingMgr = require('@src/core/matchingMgr');
 
 // Utils
 const logger = require('@src/utils/logger');
@@ -23,7 +24,7 @@ class SocketService {
         // socket.io option
         let option = {
             pingInterval: 5000,
-            pingTimeout: 100000,
+            pingTimeout: 10000,
             transport: ['polling', 'websocket'],
         };
         this.io = socketio(this.http, option);
@@ -57,6 +58,9 @@ class SocketService {
             }
 
             socket.on('disconnect', () => {
+                if (socket.userIdx != null) {
+                    matchingMgr.pop(socket.userIdx);
+                }
                 logger.info(`[${socket.id}] socket disconnected`);
             });
         });

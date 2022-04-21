@@ -2,6 +2,7 @@ exports.ROUTES = Object.freeze({
     AUTH: 'Auth',
 
     START_MATCHING: 'StartMatching',
+    CANCEL_MATCHING: 'CancelMatching',
 
     MATCH_MADE: 'MatchMade',
 });

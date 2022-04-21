@@ -23,12 +23,30 @@ exports.startMatching = async function (socket, data) {
     }
 
     const userIdx = socket.userIdx;
-    console.log(userIdx);
 
-    const userDto = new UserModel().merge({}); // @todo - get user data from db
+    const userDto = new UserModel().merge({ idx: userIdx }); // @todo - get user data from db
     userDto.socketId = socket.id;
 
     matchingMgr.push(userDto);
+
+    response[resKeys.result] = true;
+    return response;
+};
+
+exports.cancelMatching = async function (socket, data) {
+    const reqKeys = {};
+    const resKeys = {
+        result: 'result',
+    };
+
+    const response = {};
+
+    if (utils.hasKeys(reqKeys, data) == false) {
+        throw utils.errorHandling(errors.invalidRequestData);
+    }
+
+    const userIdx = socket.userIdx;
+    matchingMgr.pop(userIdx);
 
     response[resKeys.result] = true;
     return response;
