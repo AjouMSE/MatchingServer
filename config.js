@@ -5,23 +5,16 @@ const config = {
         socket: 8081,
     },
     mysql: {
-        master: {
-            host: '127.0.0.1',
+        magica_duel: {
+            host: 'magica-duel.cqv2iwkyatop.ap-northeast-2.rds.amazonaws.com',
             port: 3306,
             user: 'root',
-            password: '1234',
-            database: 'db_master',
+            password: 'magicaduel',
+            database: 'db_magica_duel',
             waitForConnections: true,
             connectionLimit: 10,
             queueLimit: 0,
             multipleStatements: true,
-        },
-    },
-    redis: {
-        user: {
-            host: '127.0.0.1',
-            port: 6379,
-            db: 0,
         },
     },
 };

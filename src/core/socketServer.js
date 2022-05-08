@@ -3,6 +3,7 @@ const socketio = require('socket.io');
 const express = require('express');
 
 // Core
+const dbMgr = require('@src/database/dbMgr');
 const ioMgr = require('@src/core/ioMgr');
 const matchingMgr = require('@src/core/matchingMgr');
 
@@ -43,7 +44,7 @@ class SocketService {
     }
 
     async init() {
-        // await dbMgr.init();
+        await dbMgr.init();
     }
 
     run() {
@@ -58,8 +59,8 @@ class SocketService {
             }
 
             socket.on('disconnect', () => {
-                if (socket.userIdx != null) {
-                    matchingMgr.pop(socket.userIdx);
+                if (socket.userId != null) {
+                    matchingMgr.pop(socket.userId);
                 }
                 logger.info(`[${socket.id}] socket disconnected`);
             });

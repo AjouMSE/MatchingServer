@@ -14,32 +14,32 @@ class SocketMgr {
     }
 
     async message(data) {
-        let userIdx = 0;
+        let userId = 0;
         try {
-            if (this.socket.userIdx != null) {
-                userIdx = this.socket.userIdx;
+            if (this.socket.userId != null) {
+                userId = this.socket.userId;
             }
-            logger.info(`[${this.socket.id}][${userIdx}] Request ${this.msg} / ${JSON.stringify(data)}`);
+            logger.info(`[${this.socket.id}][${userId}] Request ${this.msg} / ${JSON.stringify(data)}`);
 
             const router = new Router(this.msg);
             const resData = await router.process(this.socket, data);
 
-            this.emit(userIdx, resData);
+            this.emit(userId, resData);
         } catch (err) {
-            this.error(userIdx, err);
+            this.error(userId, err);
         }
     }
 
-    emit(userIdx, res) {
+    emit(userId, res) {
         this.socket.emit(this.msg, res);
-        logger.info(`[${this.socket.id}][${userIdx}] Response ${this.msg} / ${JSON.stringify(res)}`);
+        logger.info(`[${this.socket.id}][${userId}] Response ${this.msg} / ${JSON.stringify(res)}`);
     }
 
-    error(userIdx, err) {
+    error(userId, err) {
         if (config.dev == true) {
             logger.error(err);
         }
-        logger.error('[' + this.socket.id + '][' + userIdx + ']ResponseError' + this.msg + ' / ' + JSON.stringify(err));
+        logger.error('[' + this.socket.id + '][' + userId + ']ResponseError' + this.msg + ' / ' + JSON.stringify(err));
         this.socket.emit(this.msg, err);
     }
 }

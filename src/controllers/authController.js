@@ -9,7 +9,7 @@ const utils = require('@src/utils/utils');
 
 exports.auth = async function (socket, data) {
     const reqKeys = {
-        idx: 'idx',
+        id: 'id',
     };
     const resKeys = {
         result: 'result',
@@ -21,8 +21,8 @@ exports.auth = async function (socket, data) {
         throw utils.errorHandling(errors.invalidRequestData);
     }
 
-    const userIdx = data[reqKeys.idx];
-    socket.userIdx = userIdx;
+    const userId = data[reqKeys.id];
+    socket.userId = userId;
 
     response[resKeys.result] = true;
     return response;

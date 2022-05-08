@@ -8,7 +8,6 @@ Team project of Ajou Univ. Media Software Engineering Lecture
 -   Node.js
 -   Socket.io
 -   MySQL
--   Redis
 
 ## Installation
 

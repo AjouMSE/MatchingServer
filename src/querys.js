@@ -1,7 +1,7 @@
 const query = {
-    master: {
-        // tb_game_user
-        selectUser: 'SELECT idx, name FROM tb_game_user WHERE idx = ?',
+    magica_duel: {
+        // user
+        selectUser: 'SELECT id, nickname, score, nickname, win, lose, draw FROM user WHERE id = ?',
     },
 };
 

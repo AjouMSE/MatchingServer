@@ -45,6 +45,10 @@ const errors = {
         code: 10004,
         message: 'invalid response data',
     },
+    invalidResponseData: {
+        code: 10004,
+        message: 'invalid response data',
+    },
 
     // Matching
     matchRoomNotFound: {

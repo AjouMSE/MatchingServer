@@ -5,9 +5,12 @@ class UserModel extends BaseModel {
     constructor() {
         super();
 
-        this.idx = null;
-        this.name = null;
+        this.id = null;
+        this.nickname = null;
         this.score = null;
+        this.win = null;
+        this.lose = null;
+        this.draw = null;
         this.socketId = null;
     }
 }

@@ -21,7 +21,7 @@ class Matching {
     push(user) {
         this.waitingQueue.push(user);
 
-        logger.info(`[Matching Manager][push] User ${user.idx} pushed`);
+        logger.info(`[Matching Manager][push] User ${user.id} pushed`);
 
         if (this.check() == true) {
             this.make();
@@ -30,13 +30,13 @@ class Matching {
 
     /**
      *
-     * @param {Number} userIdx
+     * @param {Number} userId
      */
-    pop(userIdx) {
-        const idx = this.waitingQueue.findIndex((x) => x.idx == userIdx);
-        if (idx != -1) {
-            this.waitingQueue.splice(idx, 1);
-            logger.info(`[Matching Manager][pop] User ${userIdx} popped`);
+    pop(userId) {
+        const id = this.waitingQueue.findIndex((x) => x.id == userId);
+        if (id != -1) {
+            this.waitingQueue.splice(id, 1);
+            logger.info(`[Matching Manager][pop] User ${userId} popped`);
         }
     }
 
@@ -51,12 +51,12 @@ class Matching {
         const host = this.waitingQueue.shift();
         const client = this.waitingQueue.shift();
 
-        logger.info(`[Matching Manager][make] User ${host.idx} host / User ${client.idx} client`);
+        logger.info(`[Matching Manager][make] User ${host.id} host / User ${client.id} client`);
 
-        const roomKey = this.roomKey(host.idx, client.idx);
+        const roomKey = this.roomKey(host.id, client.id);
 
-        ioMgr.emitToUser(host.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.HOST, room: roomKey });
-        ioMgr.emitToUser(client.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.CLIENT, room: roomKey });
+        ioMgr.emitToUser(host.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.HOST, room: roomKey, opponent: client });
+        ioMgr.emitToUser(client.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.CLIENT, room: roomKey, opponent: host });
 
         this.room[roomKey] = [host, client];
     }
@@ -75,8 +75,8 @@ class Matching {
         logger.info(`[Matching Manager][delete] roomKey ${roomKey}`);
     }
 
-    roomKey(hostIdx, clientIdx) {
-        return 'H' + hostIdx + 'C' + clientIdx;
+    roomKey(hostId, clientId) {
+        return 'H' + hostId + 'C' + clientId;
     }
 }
 

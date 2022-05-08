@@ -5,6 +5,9 @@ const ioMgr = require('@src/core/ioMgr');
 // Model
 const UserModel = require('@src/models/userModel');
 
+// Service
+const userService = require('@src/services/userService');
+
 // Common
 const errors = require('@src/errors');
 
@@ -24,9 +27,13 @@ exports.startMatching = async function (socket, data) {
         throw utils.errorHandling(errors.invalidRequestData);
     }
 
-    const userIdx = socket.userIdx;
+    const userId = socket.userId;
+    if (userId == null) {
+        throw utils.errorHandling(errors.invalidRequestData);
+    }
 
-    const userDto = new UserModel().merge({ idx: userIdx }); // @todo - get user data from db
+    const user = await userService.getUser(userId);
+    const userDto = new UserModel().merge(user);
     userDto.socketId = socket.id;
 
     matchingMgr.push(userDto);
@@ -47,8 +54,8 @@ exports.cancelMatching = async function (socket, data) {
         throw utils.errorHandling(errors.invalidRequestData);
     }
 
-    const userIdx = socket.userIdx;
-    matchingMgr.pop(userIdx);
+    const userId = socket.userId;
+    matchingMgr.pop(userId);
 
     response[resKeys.result] = true;
     return response;
@@ -69,7 +76,7 @@ exports.sendMatchCode = async function (socket, data) {
         throw utils.errorHandling(errors.invalidRequestData);
     }
 
-    const userIdx = socket.userIdx;
+    const userId = socket.userId;
     const roomKey = data[reqKeys.room];
     const code = data[reqKeys.code];
 
@@ -77,7 +84,7 @@ exports.sendMatchCode = async function (socket, data) {
     if (users == null) {
         throw utils.errorHandling(errors.matchRoomNotFound);
     }
-    const client = users.find((x) => x.idx != userIdx);
+    const client = users.find((x) => x.id != userId);
     if (client == null) {
         matchingMgr.delete(roomKey);
         throw utils.errorHandling(errors.matchRoomClientNotFound);
