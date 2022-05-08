@@ -55,8 +55,8 @@ class Matching {
 
         const roomKey = this.roomKey(host.id, client.id);
 
-        ioMgr.emitToUser(host.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.HOST, room: roomKey, opponent: client });
-        ioMgr.emitToUser(client.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.CLIENT, room: roomKey, opponent: host });
+        ioMgr.emitToUser(host.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.HOST, room: roomKey, hostile: client });
+        ioMgr.emitToUser(client.socketId, TYPE.ROUTES.MATCH_MADE, { type: TYPE.USER_TYPE.CLIENT, room: roomKey, hostile: host });
 
         this.room[roomKey] = [host, client];
     }
