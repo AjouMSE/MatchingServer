@@ -4,6 +4,7 @@ const express = require('express');
 
 // Core
 const ioMgr = require('@src/core/ioMgr');
+const sessionMgr = require('@src/core/sessionMgr');
 const matchingMgr = require('@src/core/matchingMgr');
 
 // Utils
@@ -55,6 +56,7 @@ class SocketService {
 
             socket.on('disconnect', () => {
                 if (socket.userId != null) {
+                    sessionMgr.pop(socket.userId);
                     matchingMgr.pop(socket.userId);
                 }
                 logger.info(`[${socket.id}] socket disconnected`);

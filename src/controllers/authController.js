@@ -1,3 +1,6 @@
+// Core
+const sessionMgr = require('@src/core/sessionMgr');
+
 // Common
 const errors = require('@src/errors');
 
@@ -20,6 +23,8 @@ exports.auth = async function (socket, data) {
 
     const userId = data[reqKeys.id];
     socket.userId = userId;
+
+    sessionMgr.push(userId, socket.id);
 
     response[resKeys.result] = true;
     return response;

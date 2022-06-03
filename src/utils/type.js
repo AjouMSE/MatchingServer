@@ -1,5 +1,6 @@
 exports.ROUTES = Object.freeze({
     AUTH: 'Auth',
+    DUPLICATE_LOGIN: 'DuplicateLogin',
 
     START_MATCHING: 'StartMatching',
     CANCEL_MATCHING: 'CancelMatching',

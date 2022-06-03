@@ -34,6 +34,7 @@ class Router {
                 rtn = await matchingController.sendMatchCode(socket, data);
                 break;
 
+            case TYPE.ROUTES.DUPLICATE_LOGIN:
             case TYPE.ROUTES.MATCH_MADE:
             default:
                 throw utils.errorHandling(errors.invalidRequestRouter);
