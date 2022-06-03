@@ -9,5 +9,4 @@ const socketServer = new SocketServer({
     port: config.port.socket,
 });
 
-socketServer.init();
 socketServer.run();

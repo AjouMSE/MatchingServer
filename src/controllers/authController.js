@@ -1,6 +1,3 @@
-// Model
-const UserModel = require('@src/models/userModel');
-
 // Common
 const errors = require('@src/errors');
 

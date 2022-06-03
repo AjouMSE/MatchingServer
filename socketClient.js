@@ -13,7 +13,7 @@ socket.on('connect', () => {
     console.log('connected');
 });
 
-let data = { idx: 1 };
+let data = { id: 14 };
 socket.emit('Auth', data);
 
 socket.on('Auth', (data) => {

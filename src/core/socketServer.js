@@ -3,7 +3,6 @@ const socketio = require('socket.io');
 const express = require('express');
 
 // Core
-const dbMgr = require('@src/database/dbMgr');
 const ioMgr = require('@src/core/ioMgr');
 const matchingMgr = require('@src/core/matchingMgr');
 
@@ -41,10 +40,6 @@ class SocketService {
         });
 
         this.app.set('port', this.port);
-    }
-
-    async init() {
-        await dbMgr.init();
     }
 
     run() {
