@@ -11,6 +11,7 @@ class UserModel extends BaseModel {
         this.win = null;
         this.lose = null;
         this.draw = null;
+        this.ranking = null;
         this.socketId = null;
     }
 }

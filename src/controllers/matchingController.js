@@ -5,9 +5,6 @@ const ioMgr = require('@src/core/ioMgr');
 // Model
 const UserModel = require('@src/models/userModel');
 
-// Service
-const userService = require('@src/services/userService');
-
 // Common
 const errors = require('@src/errors');
 
@@ -32,8 +29,8 @@ exports.startMatching = async function (socket, data) {
         throw utils.errorHandling(errors.invalidRequestData);
     }
 
-    const user = await userService.getUser(userId);
-    const userDto = new UserModel().merge(user);
+    const userResponse = await utils.axios.get(`user/${userId}`);
+    const userDto = new UserModel().merge(userResponse.data);
     userDto.socketId = socket.id;
 
     matchingMgr.push(userDto);

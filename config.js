@@ -1,7 +1,8 @@
 const config = {
     dev: true,
-    baseUrl: 'http://127.0.0.1',
+    apiUrl: 'http://127.0.0.1',
     port: {
+        api: 8080,
         socket: 8081,
     },
     mysql: {

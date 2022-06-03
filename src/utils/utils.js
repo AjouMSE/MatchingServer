@@ -1,5 +1,9 @@
+// Modules
+const axios = require('axios');
+
 // Common
 const errors = require('@src/errors');
+const config = require('@root/config');
 
 exports.isEmptyObject = function (arg) {
     return this.getType(arg) == 'object' && Object.keys(arg).length === 0;
@@ -108,3 +112,9 @@ exports.getType = function (arg) {
 
     return String(rtn);
 };
+
+exports.axios = axios.create({
+    baseURL: `${config.apiUrl}:${config.port.api}`,
+    withCredentials: true,
+    timeout: 36000000,
+});
