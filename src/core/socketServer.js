@@ -4,15 +4,11 @@ const express = require('express');
 
 // Core
 const ioMgr = require('@src/core/ioMgr');
-const sessionMgr = require('@src/core/sessionMgr');
-const matchingMgr = require('@src/core/matchingMgr');
+const SocketMgr = require('@root/src/core/socketMgr');
 
 // Utils
 const logger = require('@src/utils/logger');
 const TYPE = require('@src/utils/type');
-
-// Socket
-const SocketMgr = require('@src/utils/socketMgr');
 
 class SocketService {
     constructor(options) {
@@ -53,14 +49,6 @@ class SocketService {
                     socketMgr.message(data);
                 });
             }
-
-            socket.on('disconnect', () => {
-                if (socket.userId != null) {
-                    sessionMgr.pop(socket.userId);
-                    matchingMgr.pop(socket.userId);
-                }
-                logger.info(`[${socket.id}] socket disconnected`);
-            });
         });
         ioMgr.setIO(this.io);
 

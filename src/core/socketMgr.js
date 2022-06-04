@@ -24,7 +24,9 @@ class SocketMgr {
             const router = new Router(this.msg);
             const resData = await router.process(this.socket, data);
 
-            this.emit(userId, resData);
+            if (resData != null) {
+                this.emit(userId, resData);
+            }
         } catch (err) {
             this.error(userId, err);
         }

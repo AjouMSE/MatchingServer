@@ -22,6 +22,9 @@ class Router {
             case TYPE.ROUTES.AUTH:
                 rtn = await authController.auth(socket, data);
                 break;
+            case TYPE.ROUTES.DISCONNECT:
+                rtn = await authController.disconnect(socket);
+                break;
 
             // Matching
             case TYPE.ROUTES.START_MATCHING:

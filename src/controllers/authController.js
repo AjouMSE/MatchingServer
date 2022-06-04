@@ -1,4 +1,5 @@
 // Core
+const matchingMgr = require('@src/core/matchingMgr');
 const sessionMgr = require('@src/core/sessionMgr');
 
 // Common
@@ -6,6 +7,7 @@ const errors = require('@src/errors');
 
 // Utils
 const utils = require('@src/utils/utils');
+const logger = require('@src/utils/logger');
 
 exports.auth = async function (socket, data) {
     const reqKeys = {
@@ -28,4 +30,12 @@ exports.auth = async function (socket, data) {
 
     response[resKeys.result] = true;
     return response;
+};
+
+exports.disconnect = async function (socket) {
+    if (socket.userId != null) {
+        sessionMgr.pop(socket.userId);
+        matchingMgr.pop(socket.userId);
+    }
+    logger.info(`[${socket.id}] socket disconnected`);
 };
