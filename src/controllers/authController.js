@@ -34,7 +34,6 @@ exports.auth = async function (socket, data) {
 
 exports.disconnect = async function (socket) {
     if (socket.userId != null) {
-        sessionMgr.pop(socket.userId);
         matchingMgr.pop(socket.userId);
     }
     logger.info(`[${socket.id}] socket disconnected`);
