@@ -22,14 +22,6 @@ class SessionMgr {
 
         this.sessionStorage[userId] = socketId;
     }
-
-    /**
-     *
-     * @param {Number} userId
-     */
-    pop(userId) {
-        delete this.sessionStorage[userId];
-    }
 }
 
 module.exports = new SessionMgr();
